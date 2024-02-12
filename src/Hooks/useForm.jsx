@@ -13,12 +13,24 @@ const useForm = () => {
       return true;
     }
   }
+  function limpar(value) {
+    setValue("");
+    return true;
+  }
+
   function onChange({ target }) {
     if (error) validade(target.value);
     setValue(target.value);
   }
 
-  return { value, setValue, onChange, error, validade: () => validade(value) };
+  return {
+    value,
+    setValue,
+    onChange,
+    error,
+    limpar,
+    validade: () => validade(value),
+  };
 };
 
 export default useForm;

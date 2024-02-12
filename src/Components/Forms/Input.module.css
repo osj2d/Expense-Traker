@@ -1,0 +1,16 @@
+.label {
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+.input {
+  border: none;
+  border-bottom: 1px solid white;
+  padding: 10px 10px 0 10px;
+  font-size: 1.125rem;
+}
+.input:focus {
+  outline: none;
+}
+.renda {
+  grid-column: 1 / -1;
+}

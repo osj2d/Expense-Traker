@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
+  background: #282a36;
+  color: #f8f8f2;
 }
+
 h1,
 h2,
 h3,
@@ -22,4 +25,19 @@ img {
 .app {
   max-width: 1200px;
   margin: 0 auto;
+}
+.btn {
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.8rem 1.2rem;
+  transition: 0.1s;
+  min-width: 8rem;
+  border: 1px solid #44475a;
+}
+.btn:hover,
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #50fa7b, 0 0 0 4px #50fa7b;
 }
