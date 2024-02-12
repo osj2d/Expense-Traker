@@ -8,8 +8,25 @@ const Form = () => {
   const valor = useForm();
   const vencimento = useForm();
   const renda = useForm();
+  const [contaFinal, setContaFinal] = useState(0);
   const [pagarList, setPagarList] = useState([]);
   const [id, setId] = useState(0);
+
+  React.useEffect(() => {
+    let token = localStorage.getItem("contas");
+    if (token) {
+      token = JSON.parse(token);
+      setPagarList(token);
+    }
+  }, []);
+
+  function atualizarLocalStorage(pagarList) {
+    console.log("Atualizar");
+    console.log(pagarList);
+    localStorage.setItem("contas", "");
+    localStorage.setItem("contas", JSON.stringify(pagarList));
+    return true;
+  }
 
   function handleClick(event) {
     event.preventDefault();
@@ -28,11 +45,20 @@ const Form = () => {
       conta.limpar();
       valor.limpar();
       vencimento.limpar();
+      renda.limpar();
+      console.log(pagarList);
+      atualizarLocalStorage(pagarList);
     }
   }
   function handleClickPaga({ target }) {
     const changeDone = pagarList.map((info) => {
       if (info.id == target.value) {
+        if (info.pago) {
+          setContaFinal(Number(contaFinal) - Number(info.valor));
+        } else {
+          console.log(info.valor);
+          setContaFinal(Number(contaFinal) + Number(info.valor));
+        }
         return { ...info, pago: !info.pago };
       }
       return info;
@@ -45,6 +71,7 @@ const Form = () => {
         return pagarList.id != target.value;
       })
     );
+    atualizarLocalStorage(pagarList);
   }
   return (
     <div>
@@ -64,6 +91,7 @@ const Form = () => {
         <button className="btn" onClick={handleClick}>
           Adicionar
         </button>
+        <p>Valores gastos no mês: {contaFinal}</p>
       </form>
       <div className={styles.contas}>
         {pagarList.map(({ id, conta, valor, vencimento, pago }) => (
@@ -82,7 +110,6 @@ const Form = () => {
           </div>
         ))}
       </div>
-      <p>{renda.value}</p>
     </div>
   );
 };
