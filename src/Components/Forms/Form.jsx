@@ -14,19 +14,18 @@ const Form = () => {
   const [ultimo, setUltimo] = useState(false);
 
   React.useEffect(() => {
-    console.log(pagarList);
     if (pagarList.length != 0) {
-      console.log("Opção 1:", pagarList);
       localStorage.setItem("contas", JSON.stringify(pagarList));
     } else if (localStorage.getItem("contas")) {
+      let idStorage = JSON.parse(localStorage.getItem("contas"));
+      setId(idStorage.slice(-1)[0]["id"]+1);
       setPagarList(JSON.parse(localStorage.getItem("contas")));
-      console.log("Opção 2:", pagarList);
     }
     if (ultimo && pagarList != 0) {
       setPagarList([]);
       localStorage.removeItem("contas");
     }
-  }, [pagarList, ultimo]);
+  }, [pagarList, ultimo, id]);
 
   function handleClick(event) {
     event.preventDefault();
@@ -107,9 +106,7 @@ const Form = () => {
           </div>
         ))}
       </div>
-      <button onClick={() => console.log(localStorage.getItem("contas"))}>
-        Teste
-      </button>
+      <button onClick={() => console.log(id)}>Teste</button>
     </div>
   );
 };
