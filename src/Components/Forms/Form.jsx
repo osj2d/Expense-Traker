@@ -18,14 +18,24 @@ const Form = () => {
       localStorage.setItem("contas", JSON.stringify(pagarList));
     } else if (localStorage.getItem("contas")) {
       let idStorage = JSON.parse(localStorage.getItem("contas"));
-      setId(idStorage.slice(-1)[0]["id"]+1);
+      setId(idStorage.slice(-1)[0]["id"] + 1);
       setPagarList(JSON.parse(localStorage.getItem("contas")));
     }
     if (ultimo && pagarList != 0) {
       setPagarList([]);
       localStorage.removeItem("contas");
     }
-  }, [pagarList, ultimo, id]);
+    const loadContaFinal = (contaFinal) => {
+      if (contaFinal === 0) {
+        pagarList.map(({ pago, valor }) => {
+          if (pago === true) {
+            setContaFinal((e) => (e += Number(valor)));
+          }
+        });
+      }
+    };
+    loadContaFinal(contaFinal);
+  }, [pagarList, ultimo, id, contaFinal]);
 
   function handleClick(event) {
     event.preventDefault();
@@ -47,6 +57,7 @@ const Form = () => {
       renda.limpar();
     }
   }
+
   function handleClickPaga({ target }) {
     const changeDone = pagarList.map((info) => {
       if (info.id == target.value) {
@@ -61,6 +72,7 @@ const Form = () => {
     });
     setPagarList(changeDone);
   }
+
   function handleDeleteConta({ target }) {
     setPagarList((current) =>
       current.filter((pagarList) => {
