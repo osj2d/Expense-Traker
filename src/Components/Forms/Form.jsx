@@ -11,22 +11,22 @@ const Form = () => {
   const [contaFinal, setContaFinal] = useState(0);
   const [pagarList, setPagarList] = useState([]);
   const [id, setId] = useState(0);
+  const [ultimo, setUltimo] = useState(false);
 
   React.useEffect(() => {
-    let token = localStorage.getItem("contas");
-    if (token) {
-      token = JSON.parse(token);
-      setPagarList(token);
-    }
-  }, []);
-
-  function atualizarLocalStorage(pagarList) {
-    console.log("Atualizar");
     console.log(pagarList);
-    localStorage.setItem("contas", "");
-    localStorage.setItem("contas", JSON.stringify(pagarList));
-    return true;
-  }
+    if (pagarList.length != 0) {
+      console.log("Opção 1:", pagarList);
+      localStorage.setItem("contas", JSON.stringify(pagarList));
+    } else if (localStorage.getItem("contas")) {
+      setPagarList(JSON.parse(localStorage.getItem("contas")));
+      console.log("Opção 2:", pagarList);
+    }
+    if (ultimo && pagarList != 0) {
+      setPagarList([]);
+      localStorage.removeItem("contas");
+    }
+  }, [pagarList, ultimo]);
 
   function handleClick(event) {
     event.preventDefault();
@@ -46,8 +46,6 @@ const Form = () => {
       valor.limpar();
       vencimento.limpar();
       renda.limpar();
-      console.log(pagarList);
-      atualizarLocalStorage(pagarList);
     }
   }
   function handleClickPaga({ target }) {
@@ -56,7 +54,6 @@ const Form = () => {
         if (info.pago) {
           setContaFinal(Number(contaFinal) - Number(info.valor));
         } else {
-          console.log(info.valor);
           setContaFinal(Number(contaFinal) + Number(info.valor));
         }
         return { ...info, pago: !info.pago };
@@ -71,7 +68,7 @@ const Form = () => {
         return pagarList.id != target.value;
       })
     );
-    atualizarLocalStorage(pagarList);
+    if (pagarList.length == 1) setUltimo(true);
   }
   return (
     <div>
@@ -110,6 +107,9 @@ const Form = () => {
           </div>
         ))}
       </div>
+      <button onClick={() => console.log(localStorage.getItem("contas"))}>
+        Teste
+      </button>
     </div>
   );
 };
