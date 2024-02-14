@@ -22,7 +22,11 @@ const Form = () => {
       setPagarList(JSON.parse(localStorage.getItem("contas")));
     }
     if (ultimo && pagarList != 0) {
+      console.log("Use EFFECT ULTIMO E PEGARlIST");
       setPagarList([]);
+      setContaFinal(0);
+      console.log("coloquei como zero");
+      console.log(contaFinal)
       localStorage.removeItem("contas");
     }
     const loadContaFinal = (contaFinal) => {
@@ -76,6 +80,9 @@ const Form = () => {
   function handleDeleteConta({ target }) {
     setPagarList((current) =>
       current.filter((pagarList) => {
+        if (pagarList.id == target.value && pagarList.pago) {
+          setContaFinal(Number(contaFinal) - Number(pagarList.valor));
+        }
         return pagarList.id != target.value;
       })
     );
