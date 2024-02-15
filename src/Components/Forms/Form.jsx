@@ -22,12 +22,11 @@ const Form = () => {
       setPagarList(JSON.parse(localStorage.getItem("contas")));
     }
     if (ultimo && pagarList != 0) {
-      console.log("Use EFFECT ULTIMO E PEGARlIST");
       setPagarList([]);
-      setContaFinal(0);
-      console.log("coloquei como zero");
-      console.log(contaFinal)
       localStorage.removeItem("contas");
+    }
+    if (ultimo) {
+      setContaFinal(0);
     }
     const loadContaFinal = (contaFinal) => {
       if (contaFinal === 0) {
