@@ -56,10 +56,10 @@ const Form = () => {
           pago: false,
         },
       ]);
-      // conta.limpar();
-      // valor.limpar();
-      // vencimento.limpar();
-      // renda.limpar();
+      conta.limpar();
+      valor.limpar();
+      vencimento.limpar();
+      renda.limpar();
     }
   }
 
