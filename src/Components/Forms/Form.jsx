@@ -16,6 +16,7 @@ const Form = () => {
   React.useEffect(() => {
     if (pagarList.length != 0) {
       localStorage.setItem("contas", JSON.stringify(pagarList));
+      setUltimo(false);
     } else if (localStorage.getItem("contas")) {
       let idStorage = JSON.parse(localStorage.getItem("contas"));
       setId(idStorage.slice(-1)[0]["id"] + 1);
@@ -24,6 +25,7 @@ const Form = () => {
     if (ultimo && pagarList != 0) {
       setPagarList([]);
       localStorage.removeItem("contas");
+      setContaFinal(0);
     }
     if (ultimo) {
       setContaFinal(0);
@@ -54,10 +56,10 @@ const Form = () => {
           pago: false,
         },
       ]);
-      conta.limpar();
-      valor.limpar();
-      vencimento.limpar();
-      renda.limpar();
+      // conta.limpar();
+      // valor.limpar();
+      // vencimento.limpar();
+      // renda.limpar();
     }
   }
 
