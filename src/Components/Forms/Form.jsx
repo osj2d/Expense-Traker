@@ -107,7 +107,7 @@ const Form = () => {
           <button className={`btn`} onClick={handleClick}>
             Adicionar
           </button>
-          <p>Valores gastos no mês: {contaFinal}</p>
+          <p className={styles.valores} >Valores gastos no mês: {contaFinal}</p>
         </div>
       </form>
       <div className={styles.contas}>
