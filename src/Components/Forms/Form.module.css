@@ -1,15 +1,24 @@
 .form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* max-width: 900px; */
+  grid-template-columns: repeat(1, 1fr);
   gap: 20px;
   padding: 20px;
   border: 3px solid #44475a;
+  border-radius: 3px;
+  align-items: center;
+  margin: 0 auto 20px auto;
 }
-
+.extras {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 .conta {
-  grid-column: 1/ -1;
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
+  align-content: center;
 }
 .pago > p,
 .pago > h2 {
@@ -18,7 +27,15 @@
 .contas {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 10px;
+  margin: 0 auto;
+  justify-items: center;
+}
+.contas > div {
+  padding: 10px;
+  border: 3px solid #f8f8f2;
+  border-radius: 5px;
+  box-shadow: 20px 20px 20px 20px #282a36;
 }
 .titulo {
   text-align: center;
@@ -31,4 +48,37 @@
 .btns button:last-child:hover,
 .btns button:last-child:focus {
   box-shadow: 0 0 0 3px #ff5555, 0 0 0 4px #ff5555 !important;
+}
+
+@media (max-width: 75rem) {
+  .form {
+    max-width: 600px;
+  }
+  .extras {
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  .conta {
+    flex-direction: column;
+  }
+  .contas {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 600px;
+  }
+}
+@media (max-width: 50rem) {
+  .form {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .contas {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    justify-items: stretch;
+    margin-top: 20px;
+  }
+  .btns {
+    justify-content: space-around;
+  }
 }

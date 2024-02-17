@@ -7,7 +7,7 @@ const Form = () => {
   const conta = useForm();
   const valor = useForm();
   const vencimento = useForm();
-  const renda = useForm();
+  // const renda = useForm();
   const [contaFinal, setContaFinal] = useState(0);
   const [pagarList, setPagarList] = useState([]);
   const [id, setId] = useState(0);
@@ -59,7 +59,6 @@ const Form = () => {
       conta.limpar();
       valor.limpar();
       vencimento.limpar();
-      renda.limpar();
     }
   }
 
@@ -93,7 +92,7 @@ const Form = () => {
     <div>
       <h1 className={styles.titulo}>Expense Traker</h1>
       <form className={styles.form} action="">
-        <Input label="Renda:" type="number" name="renda" {...renda} />
+        {/* <Input label="Renda:" type="number" name="renda" {...renda} /> */}
         <div className={styles.conta}>
           <Input label="Conta:" type="text" name="conta" {...conta} />
           <Input label="Valor:" type="number" name="valor" {...valor} />
@@ -104,13 +103,16 @@ const Form = () => {
             {...vencimento}
           />
         </div>
-        <button className="btn" onClick={handleClick}>
-          Adicionar
-        </button>
-        <p>Valores gastos no mês: {contaFinal}</p>
+        <div className={styles.extras}>
+          <button className={`btn`} onClick={handleClick}>
+            Adicionar
+          </button>
+          <p>Valores gastos no mês: {contaFinal}</p>
+        </div>
       </form>
       <div className={styles.contas}>
         {pagarList.map(({ id, conta, valor, vencimento, pago }) => (
+          // Adicionar styles aqui
           <div className={pago ? styles.pago : ""} key={id}>
             <h2>{conta}</h2>
             <p>R$: {valor}</p>
@@ -126,7 +128,6 @@ const Form = () => {
           </div>
         ))}
       </div>
-      <button onClick={() => console.log(id)}>Teste</button>
     </div>
   );
 };
