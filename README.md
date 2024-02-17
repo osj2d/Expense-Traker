@@ -6,4 +6,4 @@ Funcionalidades
 -Adição de Contas: Os usuários podem adicionar suas contas mensais, especificando o nome, valor e status de pagamento (pago ou não pago).\
 -Atualização Automática: Ao alterar o status de pagamento de uma conta, os valores de gastos mensais são atualizados automaticamente com base nas contas pagas.\
 -Exclusão de Contas: Os usuários têm a opção de excluir contas do registro.\
--Armazenamento Local: Os dados das contas são armazenados localmente usando o Local Storage, garantindo que as informações permaneçam salvas mesmo após o fechamento do navegador.\
+-Armazenamento Local: Os dados das contas são armazenados localmente usando o Local Storage, garantindo que as informações permaneçam salvas mesmo após o fechamento do navegador.
